@@ -97,5 +97,5 @@ USER $INVOICENINJA_USER
 
 COPY entrypoint.sh /usr/local/bin/invoiceninja-entrypoint
 
-ENTRYPOINT ["invoiceninja-entrypoint"]
+ENTRYPOINT ["/usr/local/bin/invoiceninja-entrypoint"]
 CMD ["php-fpm"]
