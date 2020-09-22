@@ -78,6 +78,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 	composer global require hirak/prestissimo; \
 	composer install --no-dev --no-suggest --no-progress
 
+
+COPY entrypoint.sh /usr/local/bin/invoiceninja-entrypoint
+RUN chmod +x /usr/local/bin/invoiceninja-entrypoint
+
 # Create local user
 ENV INVOICENINJA_USER=invoiceninja
 RUN addgroup -S "${INVOICENINJA_USER}" \
@@ -94,9 +98,6 @@ ENV NPM_PATH="/usr/bin"
 VOLUME /var/www/app/public
 
 USER $INVOICENINJA_USER
-
-COPY entrypoint.sh /usr/local/bin/invoiceninja-entrypoint
-RUN chmod +x /usr/local/bin/invoiceninja-entrypoint
 
 ENTRYPOINT ["/usr/local/bin/invoiceninja-entrypoint"]
 CMD ["php-fpm"]
