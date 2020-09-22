@@ -89,7 +89,6 @@ RUN addgroup -S "${INVOICENINJA_USER}" \
 ENV APP_ENV production
 ENV LOG errorlog
 ENV SELF_UPDATER_SOURCE ''
-ENV NODE_PATH="/usr/bin"
 ENV NPM_PATH="/usr/bin"
 
 VOLUME /var/www/app/public
