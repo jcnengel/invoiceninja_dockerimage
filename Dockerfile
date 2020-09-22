@@ -96,6 +96,7 @@ VOLUME /var/www/app/public
 USER $INVOICENINJA_USER
 
 COPY entrypoint.sh /usr/local/bin/invoiceninja-entrypoint
+RUN chmod +x /usr/local/bin/invoiceninja-entrypoint
 
 ENTRYPOINT ["/usr/local/bin/invoiceninja-entrypoint"]
 CMD ["php-fpm"]
