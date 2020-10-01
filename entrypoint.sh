@@ -105,7 +105,7 @@ file_env 'S3_SECRET'
 if [ $(grep TRUSTED_PROXIES .env) ]; then
 	sed -i 's/TRUSTED_PROXIES=.*/TRUSTED_PROXIES=${TRUSTED_PROXIES}/' .env
 else
-	echo "TRUSTED_PROXIES=${TRUSTED_PROXIES}" >> .env
+	echo "\nTRUSTED_PROXIES=${TRUSTED_PROXIES}\n" >> .env
 fi
 php artisan config:cache
 php artisan optimize
