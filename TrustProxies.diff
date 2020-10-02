@@ -34,3 +34,13 @@
  
      'sentry_dsn' => env('SENTRY_LARAVEL_DSN', 'https://9b4e15e575214354a7d666489783904a@sentry.invoicing.co/6'),
      'environment' => env('NINJA_ENVIRONMENT', 'selfhost'), // 'hosted', 'development', 'selfhost', 'reseller'
+--- .env.example.orig
++++ .env.example
+@@ -48,6 +48,7 @@
+ GOOGLE_MAPS_API_KEY=
+ API_SECRET=superdoopersecrethere
+ ERROR_EMAIL=
++TRUSTED_PROXIES=
+ 
+ NINJA_ENVIRONMENT=selfhost
+ 
