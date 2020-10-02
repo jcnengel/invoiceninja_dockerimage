@@ -19,7 +19,7 @@
 +     * @param \Illuminate\Contracts\Config\Repository $config
 +     */
 +    public function __construct(Repository $config) {
-+	    parent::__config($config);
++	    parent::__construct($config);
 +	    if (config('ninja.trusted_proxies'))
 +		    $this->proxies = config('ninja.trusted_proxies');
 +    }
