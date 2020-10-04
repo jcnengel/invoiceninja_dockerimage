@@ -105,6 +105,12 @@ ENV NPM_PATH="/usr/bin"
 
 VOLUME /var/www/app/public
 
+## Set up the cronjob and run cron daemon
+RUN echo "* * * * * run-parts /etc/periodic/1min" >> /etc/crontabs/root
+COPY ./cronjob_v5.sh /etc/periodic/1min/invoiceninja_cronjob
+RUN chown $INVOICENINJA_USER /etc/periodic/1min/invoiceninja_cronjob && \
+    crond -l 2 -b
+
 USER $INVOICENINJA_USER
 
 ENTRYPOINT ["/usr/local/bin/invoiceninja-entrypoint"]
