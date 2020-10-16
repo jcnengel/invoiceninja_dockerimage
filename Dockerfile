@@ -13,8 +13,6 @@ RUN set -eux; \
     libarchive-tools; \
     mkdir -p /var/www/app
     
-COPY TrustProxies.diff /tmp/TrustProxies.diff
-
 RUN curl -o /tmp/ninja.tar.gz -LJ0 https://github.com/invoiceninja/invoiceninja/tarball/v$INVOICENINJA_VERSION \
     && bsdtar --strip-components=1 -C /var/www/app -xf /tmp/ninja.tar.gz \
     && rm /tmp/ninja.tar.gz \
@@ -24,12 +22,6 @@ RUN curl -o /tmp/ninja.tar.gz -LJ0 https://github.com/invoiceninja/invoiceninja/
     && cp /var/www/app/.env.example /var/www/app/.env \
     && cp /var/www/app/.env.dusk.example /var/www/app/.env.dusk.local \
     && rm -rf /var/www/app/docs /var/www/app/tests
-
-RUN apk add patch \
-    && cd /var/www/app \
-    && patch -p0 < /tmp/TrustProxies.diff \
-    && rm /tmp/TrustProxies.diff \
-    && apk del patch
 
 ##
 # Prepare libraries using nodejs
