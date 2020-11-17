@@ -28,7 +28,7 @@ RUN curl -o /tmp/ninja.tar.gz -LJ0 https://github.com/invoiceninja/invoiceninja/
 ##
 FROM node:14-alpine AS nodejs
 RUN apk add --no-cache chromium nss freetype freetype-dev \
-	harfbuzz ca-certificates ttf-freefont curl mariadb-client
+	harfbuzz ca-certificates ttf-freefont curl
 COPY --from=base /var/www/app /var/www/app
 WORKDIR /var/www/app
 
@@ -102,6 +102,8 @@ COPY ./cronjob_v5.sh /etc/periodic/1min/invoiceninja_cronjob
 RUN echo "* * * * * run-parts /etc/periodic/1min" >> /etc/crontabs/root \
     && chown $INVOICENINJA_USER /etc/periodic/1min/invoiceninja_cronjob \
     && crond -l 2 -b
+
+RUN apk add mariadb-client
 
 USER $INVOICENINJA_USER
 
