@@ -75,7 +75,6 @@ RUN { \
 # Install composer and related requirements
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin \
 	--filename=composer; \
-	composer global require hirak/prestissimo; \
 	composer install --no-dev --no-suggest --no-progress
 
 
