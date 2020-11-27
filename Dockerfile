@@ -4,7 +4,7 @@ ARG PHP_VERSION=7.3
 # Prepare Invoiceninja sources for reuse later
 ##
 FROM alpine:latest AS base
-ARG INVOICENINJA_VERSION=5.0.26
+ARG INVOICENINJA_VERSION=5.0.27
 
 RUN set -eux; \
     apk update \
