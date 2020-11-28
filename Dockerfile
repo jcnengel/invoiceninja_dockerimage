@@ -1,4 +1,4 @@
-ARG PHP_VERSION=7.3
+ARG PHP_VERSION=7.4
 
 ##
 # Prepare Invoiceninja sources for reuse later
