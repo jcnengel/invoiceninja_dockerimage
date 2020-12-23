@@ -41,11 +41,12 @@ file_env() {
         unset "$fileVar"
 }
 
-
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
 	set -- php-fpm "$@"
 fi
+
+role=${CONTAINER_ROLE:-app}
 
 BAK_STORAGE_PATH=/var/www/app/docker-backup-storage/
 BAK_LOGO_PATH=/var/www/app/docker-backup-public/logo/
@@ -105,4 +106,14 @@ file_env 'S3_SECRET'
 php artisan config:cache
 php artisan optimize
 
-exec docker-php-entrypoint "$@"
+if [ "$role" = "scheduler" ]; then
+	while [ true ]; do
+		php artisan schedule:run --verbose --no-interaction &
+		sleep 60
+	done
+elif [ "$role" = "queue" ]; then
+	echo "Running the queue..."
+	php artisan queue:work --verbose --tries=3 --timeout=300
+else
+	exec docker-php-entrypoint "$@"
+fi
